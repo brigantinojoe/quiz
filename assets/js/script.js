@@ -1,4 +1,4 @@
-var question = document.querySelector(".question");
+var questionEl = document.querySelector(".question");
 var start_question = document.querySelector(".start_question");
 var timer = document.querySelector(".timer");
 var start = document.querySelector(".start_button");
@@ -8,17 +8,32 @@ var start_time = 69;
 var quiz = function (event) {
     start.remove();
     start_question.remove();
+    //Start Test
+    var qa = {
+        question_one: {
+            question: "Is this the very first question",
+            answer_one: "Test1",
+            answer_two: "Test2",
+            answer_three: "Test3",
+            answer_four: "Test4",
+            correct_answer: "Test2",
+        }
+    };
     var p_question = document.createElement('p');
-    var answer_one = document.createElement('button');
-    var answer_two = document.createElement('button');
-    var answer_three = document.createElement('button');
-    var answer_four = document.createElement('button');
-    question.appendChild(p_question).textContent = "Is this the first question?";
-    answers.appendChild(answer_four).textContent = "Test 2";
-    answers.appendChild(answer_one).textContent = "Test 1";
-    answers.appendChild(answer_two).textContent = "Test 2";
-    answers.appendChild(answer_three).textContent = "Test 2";
-    answers.appendChild(answer_four).textContent = "Test 2";
+    questionEl.appendChild(p_question).textContent = "Is this the first question?";
+    for (var property in qa.question_one){
+      if (property !== "question" && property !== "correct_answer") {
+        var button_text = document.createElement('button');
+        var answers_test = answers.appendChild(button_text).textContent = qa.question_one[property];
+        console.log(property);
+        // Determine what answer what answer was clicked
+        // Determine what the correct answer is
+        // How do I go to the next question once the answer is clicked? 
+      }
+    }
+    //Finish Test
+
+
 
     setInterval(function time() {
         if (start_time > 0) {
