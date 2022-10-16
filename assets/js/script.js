@@ -8,6 +8,7 @@ var start_time = 69;
 var quiz = function (event) {
     start.remove();
     start_question.remove();
+
     //Start Test
     var qa = {
         question_one: {
@@ -17,20 +18,51 @@ var quiz = function (event) {
             answer_three: "Test3",
             answer_four: "Test4",
             correct_answer: "Test2",
+        },
+        question_two: {
+            question: "Is this the second question",
+            answer_one: "Answer One",
+            answer_two: "Answer Two",
+            answer_three: "Answer Three",
+            answer_four: "Answer Four",
+            correct_answer: "Test2",
         }
     };
     var p_question = document.createElement('p');
     questionEl.appendChild(p_question).textContent = "Is this the first question?";
-    for (var property in qa.question_one){
-      if (property !== "question" && property !== "correct_answer") {
-        var button_text = document.createElement('button');
-        var answers_test = answers.appendChild(button_text).textContent = qa.question_one[property];
-        console.log(property);
-        // Determine what answer what answer was clicked
-        // Determine what the correct answer is
-        // How do I go to the next question once the answer is clicked? 
-      }
+    // Create buttons for each question. 
+    for (var property in qa.question_one) {
+        if (property !== "question" && property !== "correct_answer") {
+            var button_text = document.createElement('button');
+            var answers_test = answers.appendChild(button_text).textContent = qa.question_one[property];
+        }
     }
+
+    //Change the question each time one of the buttons is clicked.
+    var array_item = 0;
+    var pages = function () {
+        var array = [qa.question_one, qa.question_two];
+        console.log(array[array_item]);
+
+        answers.addEventListener("click", function (event) {
+            if (array_item > 1) { return; }
+            var element = event.target;
+            if (element.textContent !== "Start") {
+                var element_answer = element.textContent;
+                console.log(array[array_item].answer_four);
+                var remove_question = questionEl.getElementsByTagName("p");
+                remove_question[0].textContent = "";
+                var test = answers.getElementsByTagName("button");
+                test[0].textContent = "Next";
+                test[1].textContent = "Next";
+                test[2].textContent = "Next";
+                test[3].textContent = "Next";
+                array_item += 1;
+                pages();
+            }
+        });
+    }
+    pages();
     //Finish Test
 
 
