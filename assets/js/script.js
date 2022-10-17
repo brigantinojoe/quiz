@@ -12,7 +12,7 @@ var quiz = function (event) {
     //Start Test
     var qa = {
         question_one: {
-            question: "Is this the very first question",
+            question: "Is this the very first question?",
             answer_one: "Test1",
             answer_two: "Test2",
             answer_three: "Test3",
@@ -20,12 +20,12 @@ var quiz = function (event) {
             correct_answer: "Test2",
         },
         question_two: {
-            question: "Is this the second question",
+            question: "Is this the second question?",
             answer_one: "Answer One",
             answer_two: "Answer Two",
             answer_three: "Answer Three",
             answer_four: "Answer Four",
-            correct_answer: "Test2",
+            correct_answer: "Answer Three",
         }
     };
     var p_question = document.createElement('p');
@@ -39,24 +39,27 @@ var quiz = function (event) {
     }
 
     //Change the question each time one of the buttons is clicked.
-    var array_item = 0;
+    var array_item = 1;
     var pages = function () {
         var array = [qa.question_one, qa.question_two];
         console.log(array[array_item]);
 
         answers.addEventListener("click", function (event) {
-            if (array_item > 1) { return; }
+            if (array_item > array.length - 1) { return; }
             var element = event.target;
             if (element.textContent !== "Start") {
                 var element_answer = element.textContent;
-                console.log(array[array_item].answer_four);
-                var remove_question = questionEl.getElementsByTagName("p");
-                remove_question[0].textContent = "";
-                var test = answers.getElementsByTagName("button");
-                test[0].textContent = "Next";
-                test[1].textContent = "Next";
-                test[2].textContent = "Next";
-                test[3].textContent = "Next";
+                console.log(element_answer);
+                // TODO: Compare element_answer with the correct_answer value. Create a correct function and incorrect function.
+                // TODO: Add element below questions to populate whether or not the answer was correct.
+                // TODO: If the answer is incorrect, deduct five seconds from start_time.
+                start_time -= 5;
+                p_question.textContent = array[array_item].question;
+                var array_answers = answers.getElementsByTagName("button");
+                array_answers[0].textContent = array[array_item].answer_one;
+                array_answers[1].textContent = array[array_item].answer_two;
+                array_answers[2].textContent = array[array_item].answer_three;
+                array_answers[3].textContent = array[array_item].answer_four;
                 array_item += 1;
                 pages();
             }
@@ -79,10 +82,6 @@ var quiz = function (event) {
 
 start.addEventListener("click", quiz);
 
-// When new buttons appear, their class name cannot be ".start_button".
-// Every time the start button is clicked, it will increase the time increment.
-// TODO: Get list of questions and figure out how to loop through them every time a question is answered
-// TODO: Query the new question and set of answers.
 // TODO: use local.storage to store correct and incorrect answers.
     // Find out if you should put them in an array or an obect. Something you can loop through.
     // Every time a answered is questioned incorrectly, deduct a few seconds off the clock.
