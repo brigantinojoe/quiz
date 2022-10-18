@@ -7,12 +7,16 @@ var answer_button_1 = document.querySelector(".answer-1");
 var answer_button_2 = document.querySelector(".answer-2");
 var answer_button_3 = document.querySelector(".answer-3");
 var answer_button_4 = document.querySelector(".answer-4");
-var start_time = 69;
-array_item = 0;
+var correct = document.querySelector(".correct");
+var incorrect = document.querySelector(".incorrect");
+var footer = document.querySelector("footer");
+
+var start_time = 74;
+array_index = 0;
 
 var quiz = function (event) {
     start.remove();
-    
+
     //Start Test
     var qa = {
         question_one: {
@@ -31,28 +35,51 @@ var quiz = function (event) {
             answer_four: "Answer Four",
             correct_answer: "Answer Three",
         }
-        
+
     };
-        var array = [qa.question_one, qa.question_two];
-        start_question.textContent = array[array_item].question;
-        answer_button_1.setAttribute("style", "display: block");
-        answer_button_2.setAttribute("style", "display: block");
-        answer_button_3.setAttribute("style", "display: block");
-        answer_button_4.setAttribute("style", "display: block");
-        answer_button_1.textContent = array[array_item].answer_one;
-        answer_button_2.textContent = array[array_item].answer_two;
-        answer_button_3.textContent = array[array_item].answer_three;
-        answer_button_4.textContent = array[array_item].answer_four;
-        array_item += 1;
+
+    var question_array = [qa.question_one, qa.question_two];
+    start_question.textContent = question_array[array_index].question;
+
+    answer_button_1.setAttribute("style", "display: block");
+    answer_button_2.setAttribute("style", "display: block");
+    answer_button_3.setAttribute("style", "display: block");
+    answer_button_4.setAttribute("style", "display: block");
+    answer_button_1.textContent = question_array[array_index].answer_one;
+    answer_button_2.textContent = question_array[array_index].answer_two;
+    answer_button_3.textContent = question_array[array_index].answer_three;
+    answer_button_4.textContent = question_array[array_index].answer_four;
+
+    answers.addEventListener("click", function (event) {
+        if (event.target.tagName !== "BUTTON"){return;}
+        if (event.target.textContent !== "Start") {
+            footer.setAttribute("style", "display: block;");
+            user_answer = event.target.textContent;
+            if (user_answer === question_array[array_index].correct_answer) {                
+                correct.setAttribute("style", "display: block;");
+                incorrect.setAttribute("style", "display: none;");
+            } else {
+                incorrect.setAttribute("style", "display: block;");
+                correct.setAttribute("style", "display: none;");
+                start_time -= 15;
+            }
+
+            array_index += 1;
+            quiz();
+
+        } else {
+            setInterval(function time() {
+                if (start_time > 0) {
+                    timer.textContent = `Time: ${start_time}`;
+                    start_time--;
+                } else {
+                    timer.textContent = `Time: 0`;
+                }
+            }, 1000);
+        }
+    });
+
+
 }
 
 start.addEventListener("click", quiz);
-
-// setInterval(function time() {
-//     if (start_time > 0) {
-//         timer.textContent = `Time: ${start_time}`;
-//         start_time--;
-//     } else {
-//         timer.textContent = `Time: 0`;
-//     }
-// }, 1000);
