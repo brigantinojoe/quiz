@@ -3,12 +3,16 @@ var start_question = document.querySelector(".start_question");
 var timer = document.querySelector(".timer");
 var start = document.querySelector(".start_button");
 var answers = document.querySelector(".answer");
+var answer_button_1 = document.querySelector(".answer-1");
+var answer_button_2 = document.querySelector(".answer-2");
+var answer_button_3 = document.querySelector(".answer-3");
+var answer_button_4 = document.querySelector(".answer-4");
 var start_time = 69;
+array_item = 0;
 
 var quiz = function (event) {
     start.remove();
-    start_question.remove();
-
+    
     //Start Test
     var qa = {
         question_one: {
@@ -27,62 +31,28 @@ var quiz = function (event) {
             answer_four: "Answer Four",
             correct_answer: "Answer Three",
         }
+        
     };
-    var p_question = document.createElement('p');
-    questionEl.appendChild(p_question).textContent = "Is this the first question?";
-    // Create buttons for each question. 
-    for (var property in qa.question_one) {
-        if (property !== "question" && property !== "correct_answer") {
-            var button_text = document.createElement('button');
-            var answers_test = answers.appendChild(button_text).textContent = qa.question_one[property];
-        }
-    }
-
-    //Change the question each time one of the buttons is clicked.
-    var array_item = 1;
-    var pages = function () {
         var array = [qa.question_one, qa.question_two];
-        console.log(array[array_item]);
-
-        answers.addEventListener("click", function (event) {
-            if (array_item > array.length - 1) { return; }
-            var element = event.target;
-            if (element.textContent !== "Start") {
-                var element_answer = element.textContent;
-                console.log(element_answer);
-                // TODO: Compare element_answer with the correct_answer value. Create a correct function and incorrect function.
-                // TODO: Add element below questions to populate whether or not the answer was correct.
-                // TODO: If the answer is incorrect, deduct five seconds from start_time.
-                start_time -= 5;
-                p_question.textContent = array[array_item].question;
-                var array_answers = answers.getElementsByTagName("button");
-                array_answers[0].textContent = array[array_item].answer_one;
-                array_answers[1].textContent = array[array_item].answer_two;
-                array_answers[2].textContent = array[array_item].answer_three;
-                array_answers[3].textContent = array[array_item].answer_four;
-                array_item += 1;
-                pages();
-            }
-        });
-    }
-    pages();
-    //Finish Test
-
-
-
-    setInterval(function time() {
-        if (start_time > 0) {
-            timer.textContent = `Time: ${start_time}`;
-            start_time--;
-        } else {
-            timer.textContent = `Time: 0`;
-        }
-    }, 1000);
+        start_question.textContent = array[array_item].question;
+        answer_button_1.setAttribute("style", "display: block");
+        answer_button_2.setAttribute("style", "display: block");
+        answer_button_3.setAttribute("style", "display: block");
+        answer_button_4.setAttribute("style", "display: block");
+        answer_button_1.textContent = array[array_item].answer_one;
+        answer_button_2.textContent = array[array_item].answer_two;
+        answer_button_3.textContent = array[array_item].answer_three;
+        answer_button_4.textContent = array[array_item].answer_four;
+        array_item += 1;
 }
 
 start.addEventListener("click", quiz);
 
-// TODO: use local.storage to store correct and incorrect answers.
-    // Find out if you should put them in an array or an obect. Something you can loop through.
-    // Every time a answered is questioned incorrectly, deduct a few seconds off the clock.
-// TODO: When the game is over, user should enter their score so they can check best scores later.
+// setInterval(function time() {
+//     if (start_time > 0) {
+//         timer.textContent = `Time: ${start_time}`;
+//         start_time--;
+//     } else {
+//         timer.textContent = `Time: 0`;
+//     }
+// }, 1000);
