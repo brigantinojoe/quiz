@@ -10,6 +10,7 @@ var answer_button_4 = document.querySelector(".answer-4");
 var correct = document.querySelector(".correct");
 var incorrect = document.querySelector(".incorrect");
 var footer = document.querySelector("footer");
+var input = document.querySelector("input");
 
 var qa = {
     question_one: {
@@ -95,15 +96,15 @@ var qa = {
 };
 
 var question_array = [
-    qa.question_one, 
-    qa.question_two, 
-    qa.question_three, 
-    qa.question_four, 
-    qa.question_five, 
-    qa.question_six, 
-    qa.question_seven, 
-    qa.question_eight, 
-    qa.question_nine, 
+    qa.question_one,
+    qa.question_two,
+    qa.question_three,
+    qa.question_four,
+    qa.question_five,
+    qa.question_six,
+    qa.question_seven,
+    qa.question_eight,
+    qa.question_nine,
     qa.question_ten];
 
 var start_time = 74;
@@ -124,17 +125,21 @@ answers.addEventListener("click", function (event) {
             start_time -= 15;
         }
 
-        if(array_index < question_array.length - 1){
+        if (array_index < question_array.length - 1) {
             array_index += 1;
             array_iteration();
-        } else {console.log(start_time);}
+        } else {
+            console.log("It should work")
+            clearInterval(interval);
+            score();
+        }
     }
 });
 
 start.addEventListener("click", array_iteration);
 
 function array_iteration() {
-    start.remove();
+    start.setAttribute("style", "display: none;");
 
     start_question.textContent = question_array[array_index].question;
 
@@ -147,14 +152,28 @@ function array_iteration() {
     answer_button_3.textContent = question_array[array_index].answer_three;
     answer_button_4.textContent = question_array[array_index].answer_four;
 
-    if (start_time === 74) {
-        setInterval(function time() {
-            if (start_time > 0) {
-                timer.textContent = `Time: ${start_time}`;
-                start_time--;
-            } else {
-                timer.textContent = `Time: 0`;
-            }
-        }, 1000);
+}
+
+
+
+var interval = setInterval(function time() {
+    if (start.getAttribute("style") === "display: none;") {
+        timer.textContent = `Time: ${start_time}`;
+        start_time--;
+    } else {
+        timer.textContent = `Time: 75`;
     }
+}, 1000);
+
+var score = function () {
+    localStorage.setItem("score", start_time+1);
+    console.log(localStorage.getItem("score"));
+    start_question.textContent = `Congratulations! You completed the quiz with a score of ${start_time+1}. Please submit your score below to save your highscore!`;
+    answer_button_1.setAttribute("style", "display: none");
+    answer_button_2.setAttribute("style", "display: none");
+    answer_button_3.setAttribute("style", "display: none");
+    answer_button_4.setAttribute("style", "display: none");
+    correct.setAttribute("style", "display: none;");
+    incorrect.setAttribute("style", "display: none;");
+    input.setAttribute("style", "display: block;");
 }
