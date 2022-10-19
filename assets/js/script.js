@@ -11,34 +11,131 @@ var correct = document.querySelector(".correct");
 var incorrect = document.querySelector(".incorrect");
 var footer = document.querySelector("footer");
 
+var qa = {
+    question_one: {
+        question: "What does Pam steal in the first season?",
+        answer_one: "Dwights Bookbag",
+        answer_two: "Yogurt",
+        answer_three: "Angela's Cat",
+        answer_four: "Post-It Notes",
+        correct_answer: "Post-It Notes",
+    },
+    question_two: {
+        question: "Who stole all of Michael's blue jeans when he was a kid?",
+        answer_one: "His Mom",
+        answer_two: "Mr. Rodgers",
+        answer_three: "The MailMan",
+        answer_four: "Foreign Exchange Student",
+        correct_answer: "Foreign Exchange Student",
+    },
+    question_three: {
+        question: "How does Michael burn his foot?",
+        answer_one: "On a George Foreman Grill",
+        answer_two: "Walking on hot coals",
+        answer_three: "Standing on hot pavement",
+        answer_four: "Kicking the baler",
+        correct_answer: "On a George Foreman Grill",
+    },
+    question_four: {
+        question: "What cause does Michael use for the fun run?",
+        answer_one: "Skin Cancer",
+        answer_two: "Rabies",
+        answer_three: "Hip Surgery",
+        answer_four: "Diabetes",
+        correct_answer: "Rabies",
+    },
+    question_five: {
+        question: "What color does Dwight paint Michael's office when he thinks he's taking over?",
+        answer_one: "White",
+        answer_two: "Black",
+        answer_three: "Blue",
+        answer_four: "Red",
+        correct_answer: "Black",
+    },
+    question_six: {
+        question: "What kind of car does Dwight drive?",
+        answer_one: "Mustang",
+        answer_two: "Wagon",
+        answer_three: "Trans Am",
+        answer_four: "Chrysler",
+        correct_answer: "Trans Am",
+    },
+    question_seven: {
+        question: "What's the name of the company that buys Dunder Mifflin?",
+        answer_one: "Pfizer",
+        answer_two: "Sabre",
+        answer_three: "Pagre",
+        answer_four: "Padre",
+        correct_answer: "Sabre",
+    },
+    question_eight: {
+        question: "Which character started as “the temp”?",
+        answer_one: "Ryan",
+        answer_two: "Erin",
+        answer_three: "Kevin",
+        answer_four: "Kelly",
+        correct_answer: "Ryan",
+    },
+    question_nine: {
+        question: "In the absence of ice cream, what does Michael eat?",
+        answer_one: "Mustard and Chips",
+        answer_two: "Yogurt and Raisins",
+        answer_three: "Hollandaise and Peanut Butter",
+        answer_four: "Mayo and Black Olives",
+        correct_answer: "Mayo and Black Olives",
+    },
+    question_ten: {
+        question: "How many minutes did Michael Scott work at the office?",
+        answer_one: "8,500,000 minutes",
+        answer_two: "9,568,000 minutes",
+        answer_three: "9,986,000 minutes",
+        answer_four: "9,999,000 minutes",
+        correct_answer: "9,986,000 minutes",
+    },
+};
+
+var question_array = [
+    qa.question_one, 
+    qa.question_two, 
+    qa.question_three, 
+    qa.question_four, 
+    qa.question_five, 
+    qa.question_six, 
+    qa.question_seven, 
+    qa.question_eight, 
+    qa.question_nine, 
+    qa.question_ten];
+
 var start_time = 74;
 array_index = 0;
 
-var quiz = function (event) {
-    start.remove();
+answers.addEventListener("click", function (event) {
+    if (event.target.tagName !== "BUTTON") { return; }
+    if (event.target.textContent !== "Start") {
+        footer.setAttribute("style", "display: block;");
+        user_answer = event.target.textContent;
 
-    //Start Test
-    var qa = {
-        question_one: {
-            question: "Is this the very first question?",
-            answer_one: "Test1",
-            answer_two: "Test2",
-            answer_three: "Test3",
-            answer_four: "Test4",
-            correct_answer: "Test2",
-        },
-        question_two: {
-            question: "Is this the second question?",
-            answer_one: "Answer One",
-            answer_two: "Answer Two",
-            answer_three: "Answer Three",
-            answer_four: "Answer Four",
-            correct_answer: "Answer Three",
+        if (user_answer === question_array[array_index].correct_answer) {
+            correct.setAttribute("style", "display: block;");
+            incorrect.setAttribute("style", "display: none;");
+        } else {
+            incorrect.setAttribute("style", "display: block;");
+            correct.setAttribute("style", "display: none;");
+            start_time -= 15;
         }
 
-    };
+        if(array_index < question_array.length - 1){
+            array_index += 1;
+            array_iteration();
+        } else {console.log(start_time);}
+    }
+});
 
-    var question_array = [qa.question_one, qa.question_two];
+start.addEventListener("click", array_iteration);
+
+function array_iteration() {
+    start.remove();
+
     start_question.textContent = question_array[array_index].question;
 
     answer_button_1.setAttribute("style", "display: block");
@@ -50,36 +147,14 @@ var quiz = function (event) {
     answer_button_3.textContent = question_array[array_index].answer_three;
     answer_button_4.textContent = question_array[array_index].answer_four;
 
-    answers.addEventListener("click", function (event) {
-        if (event.target.tagName !== "BUTTON"){return;}
-        if (event.target.textContent !== "Start") {
-            footer.setAttribute("style", "display: block;");
-            user_answer = event.target.textContent;
-            if (user_answer === question_array[array_index].correct_answer) {                
-                correct.setAttribute("style", "display: block;");
-                incorrect.setAttribute("style", "display: none;");
+    if (start_time === 74) {
+        setInterval(function time() {
+            if (start_time > 0) {
+                timer.textContent = `Time: ${start_time}`;
+                start_time--;
             } else {
-                incorrect.setAttribute("style", "display: block;");
-                correct.setAttribute("style", "display: none;");
-                start_time -= 15;
+                timer.textContent = `Time: 0`;
             }
-
-            array_index += 1;
-            quiz();
-
-        } else {
-            setInterval(function time() {
-                if (start_time > 0) {
-                    timer.textContent = `Time: ${start_time}`;
-                    start_time--;
-                } else {
-                    timer.textContent = `Time: 0`;
-                }
-            }, 1000);
-        }
-    });
-
-
+        }, 1000);
+    }
 }
-
-start.addEventListener("click", quiz);

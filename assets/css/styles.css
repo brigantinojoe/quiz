@@ -31,12 +31,16 @@ section {
 }
 
 button {
-    width: 200px;
+    width: auto;
     color: white;
     font-size: 25px;
     height: 50px;
     background-color: blueviolet;
     border-radius: 10px;
+}
+
+.start_button {
+    width: 200px;
 }
 
 button:hover {
