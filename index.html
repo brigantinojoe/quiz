@@ -12,7 +12,7 @@
 <body>
     <header>
         <div class="score">
-            <p>View High Scores</p>
+            <a href="./scores.html">View High Scores</a>
         </div>
         <div class="time">
             <p class="timer">Time: 75</p>
@@ -21,7 +21,8 @@
     <section>
         <div class="question">
             <p class="start_question">Are you ready for The Office Triva? You have 75 seconds to complete the quiz. Each
-                incorrect answer deducts 15 seconds from the clock. The fastest completion will receive the highest score. Please click the button below.</p>
+                incorrect answer deducts 15 seconds from the clock. The fastest completion will receive the highest
+                score. Click the Start button below to begin.</p>
         </div>
         <div class="answer">
             <button class="start_button">Start</button>
@@ -30,7 +31,13 @@
             <button style="display: none" class="answer-3"></button>
             <button style="display: none" class="answer-4"></button>
         </div>
-        <input type="text" style="display: none;">
+        <main class="submission" style="display: none;">
+            <div class="input_score">
+                <p>Initials:</p>
+                <input class="input_value" type="text" style="display: block;">
+                <button class="submit">Submit</button>
+            </div>
+        </main>
         <footer style="display: none;">
             <hr>
             <p style="display: none;" class="correct">That's correct!</p>

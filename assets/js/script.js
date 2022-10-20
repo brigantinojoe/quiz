@@ -10,7 +10,10 @@ var answer_button_4 = document.querySelector(".answer-4");
 var correct = document.querySelector(".correct");
 var incorrect = document.querySelector(".incorrect");
 var footer = document.querySelector("footer");
-var input = document.querySelector("input");
+var input = document.querySelector(".submission");
+var input_value = document.querySelector(".input_value");
+var submit_score = document.querySelector(".submit");
+var score_array = [localStorage.getItem("final_scores")];
 
 var qa = {
     question_one: {
@@ -97,15 +100,19 @@ var qa = {
 
 var question_array = [
     qa.question_one,
-    qa.question_two,
-    qa.question_three,
-    qa.question_four,
-    qa.question_five,
-    qa.question_six,
-    qa.question_seven,
-    qa.question_eight,
-    qa.question_nine,
-    qa.question_ten];
+    qa.question_two];
+
+    // var question_array = [
+    //     qa.question_one,
+    //     qa.question_two,
+    //     qa.question_three,
+    //     qa.question_four,
+    //     qa.question_five,
+    //     qa.question_six,
+    //     qa.question_seven,
+    //     qa.question_eight,
+    //     qa.question_nine,
+    //     qa.question_ten];
 
 var start_time = 74;
 array_index = 0;
@@ -129,7 +136,6 @@ answers.addEventListener("click", function (event) {
             array_index += 1;
             array_iteration();
         } else {
-            console.log("It should work")
             clearInterval(interval);
             score();
         }
@@ -137,6 +143,7 @@ answers.addEventListener("click", function (event) {
 });
 
 start.addEventListener("click", array_iteration);
+
 
 function array_iteration() {
     start.setAttribute("style", "display: none;");
@@ -163,17 +170,50 @@ var interval = setInterval(function time() {
     } else {
         timer.textContent = `Time: 75`;
     }
+    if (start_time <= -1) {
+        console.log("IF Statement worked");
+        clearInterval(interval);
+        timer.textContent = "Time: 0";
+        score();
+    }
 }, 1000);
 
 var score = function () {
-    localStorage.setItem("score", start_time+1);
-    console.log(localStorage.getItem("score"));
-    start_question.textContent = `Congratulations! You completed the quiz with a score of ${start_time+1}. Please submit your score below to save your highscore!`;
-    answer_button_1.setAttribute("style", "display: none");
-    answer_button_2.setAttribute("style", "display: none");
-    answer_button_3.setAttribute("style", "display: none");
-    answer_button_4.setAttribute("style", "display: none");
-    correct.setAttribute("style", "display: none;");
-    incorrect.setAttribute("style", "display: none;");
-    input.setAttribute("style", "display: block;");
+    console.log(start_time);
+    if (start_time <= 0) {
+        localStorage.setItem("score", 0);
+    } else {
+        localStorage.setItem("score", start_time + 1);
+    }
+    JSON.stringify(localStorage.getItem("score"));
+    timer.textContent = `Time: ${localStorage.getItem("score")}`;
+    if (localStorage.getItem("score") <= 0) {
+        start_question.textContent = "Looks like you might need to the 'The Office' again.. Dwight would be devastated! Refresh the page to try again.";
+        input.setAttribute("style", "display: none;");
+    } else {
+        start_question.textContent = `Congratulations! You completed the quiz with a score of ${localStorage.getItem("score")}. Submit your initials below and compare to other Office Superfans!`;
+        input.setAttribute("style", "display: flex;");
+    }
+    answers.setAttribute("style", "display: none");
+    footer.setAttribute("style", "display: none;");
+}
+
+var submission = function () {
+    // Get initial value
+    var initials = input_value.value;
+    var final_score = `${initials}: ${localStorage.getItem("score")}`;
+    // Store to locatstorage
+    score_array.push(final_score);
+    localStorage.setItem("final_scores", score_array);
+    console.log(score_array);
+    window.location("./index.html");
+}
+
+submit_score.addEventListener("click", submission);
+// Set function for clicking the submit button. Save Initials and Score into local storage. Render scores on a separate html file.
+
+if (start_time <= 0) {
+    start_time = 0;
+    score();
+    submission();
 }
