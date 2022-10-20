@@ -185,7 +185,7 @@ var score = function () {
     JSON.stringify(localStorage.getItem("score"));
     timer.textContent = `Time: ${localStorage.getItem("score")}`;
     if (localStorage.getItem("score") <= 0) {
-        start_question.textContent = "Looks like you might need to the 'The Office' again.. Dwight would be devastated! Submit your score and try again!";
+        start_question.textContent = "Looks like you might need to watch the 'The Office' again.. Dwight would be devastated! Submit your score and try again!";
         
     } else {
         start_question.textContent = `Congratulations! You completed the quiz with a score of ${localStorage.getItem("score")}. Submit your initials below and compare to other Office Superfans!`;
