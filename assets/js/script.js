@@ -14,6 +14,7 @@ var input = document.querySelector(".submission");
 var input_value = document.querySelector(".input_value");
 var submit_score = document.querySelector(".submit");
 var score_array = [localStorage.getItem("final_scores")];
+var initials_message = document.querySelector(".enter-initials");
 
 var qa = {
     question_one: {
@@ -98,21 +99,17 @@ var qa = {
     },
 };
 
-var question_array = [
-    qa.question_one,
-    qa.question_two];
-
-    // var question_array = [
-    //     qa.question_one,
-    //     qa.question_two,
-    //     qa.question_three,
-    //     qa.question_four,
-    //     qa.question_five,
-    //     qa.question_six,
-    //     qa.question_seven,
-    //     qa.question_eight,
-    //     qa.question_nine,
-    //     qa.question_ten];
+    var question_array = [
+        qa.question_one,
+        qa.question_two,
+        qa.question_three,
+        qa.question_four,
+        qa.question_five,
+        qa.question_six,
+        qa.question_seven,
+        qa.question_eight,
+        qa.question_nine,
+        qa.question_ten];
 
 var start_time = 74;
 array_index = 0;
@@ -189,11 +186,11 @@ var score = function () {
     timer.textContent = `Time: ${localStorage.getItem("score")}`;
     if (localStorage.getItem("score") <= 0) {
         start_question.textContent = "Looks like you might need to the 'The Office' again.. Dwight would be devastated! Refresh the page to try again.";
-        input.setAttribute("style", "display: none;");
+        
     } else {
         start_question.textContent = `Congratulations! You completed the quiz with a score of ${localStorage.getItem("score")}. Submit your initials below and compare to other Office Superfans!`;
-        input.setAttribute("style", "display: flex;");
     }
+    input.setAttribute("style", "display: flex;");
     answers.setAttribute("style", "display: none");
     footer.setAttribute("style", "display: none;");
 }
@@ -201,12 +198,19 @@ var score = function () {
 var submission = function () {
     // Get initial value
     var initials = input_value.value;
+    if (initials === "") {
+        footer.setAttribute("style", "display: block;");
+        correct.setAttribute("style", "display: none");
+        incorrect.setAttribute("style", "display: none");
+        initials_message.setAttribute("style", "display: block");
+        return;
+    }
     var final_score = `${initials}: ${localStorage.getItem("score")}`;
     // Store to locatstorage
-    score_array.push(final_score);
+    score_array.push([final_score]);
     localStorage.setItem("final_scores", score_array);
     console.log(score_array);
-    window.location("./index.html");
+    window.location.href = "./scores.html";
 }
 
 submit_score.addEventListener("click", submission);

@@ -104,3 +104,11 @@ ul {
     align-items: center;
     font-size: 35px;
 }
+
+.score-buttons {
+    display: flex;
+    flex-direction: row;
+    width: 40%;
+    justify-content: space-between;
+    align-items: center;
+}
