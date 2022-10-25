@@ -214,10 +214,3 @@ var submission = function () {
 }
 
 submit_score.addEventListener("click", submission);
-// Set function for clicking the submit button. Save Initials and Score into local storage. Render scores on a separate html file.
-
-if (start_time <= 0) {
-    start_time = 0;
-    score();
-    submission();
-}
