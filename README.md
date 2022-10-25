@@ -1,39 +1,30 @@
 # It's Quiz Time!
-## Description
 
-Provide a short description explaining the what, why, and how of your project. Use the following questions as a guide:
-- What was your motivation?
-- Why did you build this project? (Note: the answer is not "Because it was a homework assignment.")
-- What problem does it solve?
-- What did you learn?
-## Table of Contents (Optional)
-If your README is long, add a table of contents to make it easy for users to find what they need.
-- [Installation](#installation)
-- [Usage](#usage)
-- [Credits](#credits)
-- [License](#license)
+## Description
+Office Superfans are abundant, but quizes that truly test superfans' cability are few and far between. The [Office Superfan quiz](https://brigantinojoe.github.io/quiz/) will challenge your Office series knowledge and will save your scores to compete with other superfans! After watching the series over and over, I decided to create this quiz for others who have done the same. 
+
+I learned quite a bit of Javascript this project including, but not limited to:
+- Manipulating existing HTML elements. Specifically using the display style to hide and unhide certain elements.
+- Adding Event Listeners for the various types of HTML buttons
+- Using dynamic CSS to apply CSS to the new elements created in the Javascript functions.
+- Using intervals to create timers that can be changed and saved as a final score.
+
 ## Installation
-What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running.
+There is no installation necessary. Please visit [this website](https://brigantinojoe.github.io/quiz/) to start! 
+
 ## Usage
-Provide instructions and examples for use. Include screenshots as needed.
-To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative filepath, add it to your README using the following syntax:
-    ```md
-    ![alt text](assets/images/screenshot.png)
-    ```
-## Credits
-List your collaborators, if any, with links to their GitHub profiles.
-If you used any third-party assets that require attribution, list the creators with links to their primary web presence in this section.
-If you followed tutorials, include links to those here as well.
-## License
-The last section of a high-quality README file is the license. This lets other developers know what they can and cannot do with your project. If you need help choosing a license, refer to [https://choosealicense.com/](https://choosealicense.com/).
----
-:trophy: The previous sections are the bare minimum, and your project will ultimately determine the content of this document. You might also want to consider adding the following sections.
-## Badges
-![badmath](https://img.shields.io/github/languages/top/lernantino/badmath)
-Badges aren't necessary, per se, but they demonstrate street cred. Badges let other developers know that you know what you're doing. Check out the badges hosted by [shields.io](https://shields.io/). You may not understand what they all represent now, but you will in time.
-## Features
-If your project has a lot of features, list them here.
-## How to Contribute
-If you created an application or package and would like other developers to contribute it, you can include guidelines for how to do so. The [Contributor Covenant](https://www.contributor-covenant.org/) is an industry standard, but you can always write your own if you'd prefer.
-## Tests
-Go the extra mile and write tests for your application. Then provide examples on ho
+1. Go to [this website](https://brigantinojoe.github.io/quiz/) and click the "Start" button on the bottom of the page.
+2. You'll have 75 seconds to complete the quiz.
+3. Answer the questions to the best of your ability! There are four possible answers for each question.
+    - Each incorrect answer will deduct 15 seconds from the running timer.
+4. Your score will be the remaining time you have left after answering the last question. 
+5. After you complete the quiz, or if the timer hits '0', you'll be directed to submit your score. Please type in your initials and click 'Submit' as shown below.
+    ![Submit Button](./assets/images/submit.jpg)
+6. Once you click submit, you'll be directed to the "High Scores" page where you can compare your score to others. 
+7. If you'd like to reset the high scores, click on the "Reset High Scores" button as shown below. 
+    ![Reset Scores](./assets/images/reset-scores.jpg)
+8. Otherwise, you can click "Play Again" to start the quiz for a better score.
+    ![Play Again](./assets/images/play-again.jpg)
+9. If, at any point, you want to view high scores without completing the quiz, click on the "View High Scores" link on the top left corner of your screen.
+    ![View Scores](./assets/images/view-scores.jpg)
+
