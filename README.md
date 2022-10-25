@@ -24,7 +24,7 @@ There is no installation necessary. Please visit [this website](https://briganti
 7. If you'd like to reset the high scores, click on the "Reset High Scores" button as shown below. 
     ![Reset Scores](./assets/images/reset-scores.jpg)
 8. Otherwise, you can click "Play Again" to start the quiz for a better score.
-    ![Play Again](./assets/images/play-again.jpg)
+![Play Again](./assets/images/play-again.jpg)
 9. If, at any point, you want to view high scores without completing the quiz, click on the "View High Scores" link on the top left corner of your screen.
-    ![View Scores](./assets/images/view-scores.jpg)
+![View Scores](./assets/images/view-scores.jpg)
 
